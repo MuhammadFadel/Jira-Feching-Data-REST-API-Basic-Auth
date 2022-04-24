@@ -37,8 +37,16 @@ namespace QRG.Services
 
                 if (!string.IsNullOrEmpty(apiRequest.AccessToken))
                 {
-                    client.DefaultRequestHeaders.Authorization =                        
+                    try
+                    {
+                        var checkerStringBase = Convert.FromBase64String(apiRequest.AccessToken);
+                        client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Basic", apiRequest.AccessToken);
+                    }
+                    catch
+                    {
+                        message.Headers.Add("PRIVATE-TOKEN", apiRequest.AccessToken);
+                    }                                        
                 }
 
                 HttpResponseMessage apiResponse = null;

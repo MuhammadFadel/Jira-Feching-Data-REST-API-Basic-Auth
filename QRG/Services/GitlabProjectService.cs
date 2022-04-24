@@ -3,11 +3,11 @@ using QRG.Services.IServices;
 
 namespace QRG.Services
 {
-    public class ProjectService : BaseService, IProjectService
+    public class GitlabProjectService : BaseService, IGitlabProjectService
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public ProjectService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        public GitlabProjectService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,8 +16,8 @@ namespace QRG.Services
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,                
-                ApiUrl = SD.JiraApiBase + "project/" + id + "?expand=description,lead",
+                ApiType = SD.ApiType.GET,
+                ApiUrl = SD.GitlabApiBase + "projects/" + id ,
                 AccessToken = token
             });
         }
@@ -26,10 +26,10 @@ namespace QRG.Services
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,                
-                ApiUrl = SD.JiraApiBase + "project?expand=lead",
+                ApiType = SD.ApiType.GET,
+                ApiUrl = SD.GitlabApiBase + "projects" + "?owned=true",
                 AccessToken = token
             });
         }
-    }        
+    }
 }

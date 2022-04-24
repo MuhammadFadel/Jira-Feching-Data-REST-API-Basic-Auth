@@ -23,6 +23,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IProjectService, ProjectService>();
 SD.JiraApiBase = builder.Configuration["JiraService:JiraApiUrl"];
+
+builder.Services.AddHttpClient<IGitlabProjectService, GitlabProjectService>();
+SD.GitlabApiBase = builder.Configuration["GitlabService:GitlabApiUrl"];
+
+builder.Services.AddScoped<IGitlabProjectService, GitlabProjectService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 

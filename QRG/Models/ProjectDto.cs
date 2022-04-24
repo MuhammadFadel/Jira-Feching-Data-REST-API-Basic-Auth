@@ -253,10 +253,10 @@ namespace QRG.Models
         public List<Level> levels { get; set; }
     }
 
-    public class Permissions
-    {
-        public bool canEdit { get; set; }
-    }
+    //public class Permissions
+    //{
+    //    public bool canEdit { get; set; }
+    //}
 
     public class Properties
     {
